@@ -1,11 +1,8 @@
 /target
 *.class
-.classpath
 bin/
 *.bak
 Thumbs.db
 target/
-.settings/
-.project
 *.log
 build/
