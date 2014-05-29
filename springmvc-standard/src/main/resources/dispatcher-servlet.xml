@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<!-- 注解扫描 -->
+	<context:component-scan base-package="com.vincent.standard">
+	</context:component-scan>
+
+	<!-- 开启Spring对@AspectJ风格切面的支持 -->
+	<aop:aspectj-autoproxy/>
+	
+	
+	<!-- 注入配置文件到 名为properties的bean中-->
+	<util:properties id="properties" location="classpath:config.properties" />
+
+	<!-- springmvc view注入 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/page/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<mvc:annotation-driven/>
+	<!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		 <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+		<property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+		<property name="validationPropertyMap">
+			<util:map>
+				<entry key="hibernate.validator.fail_fast" value="true" />
+			</util:map>
+		</property>
+	</bean>
+</beans>
