@@ -1,8 +1,1 @@
 /target
-*.class
-bin/
-*.bak
-Thumbs.db
-target/
-*.log
-build/
