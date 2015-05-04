@@ -25,13 +25,13 @@ import com.vincent.standard.entity.User;
 public class UserController {
 	private List<User> userList = Collections.synchronizedList(new ArrayList<User>());
 	
-	@RequestMapping("/add")
+	@RequestMapping("add")
 	public String addUser(HttpServletRequest request, @Valid User user, BindingResult result, ModelMap model){
 		userList.add(user);
 		return listUser(request, model);
 	}
 	
-	@RequestMapping("/get")
+	@RequestMapping("get")
 	public String listUser(HttpServletRequest request, ModelMap model){
 		model.put("userList", userList);
 		return "user/allUsers";
