@@ -1,4 +1,4 @@
-package com.vincent.standard.ttt;
+package com.vincent.standard.qps;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
